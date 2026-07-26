@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DK Tours &amp; Travels — Bespoke Journeys, Panvel</title>
+<meta name="description" content="DK Tours & Travels designs private, curated journeys — destinations, luxury cruises, polar expeditions and fully customized itineraries. Based in Panvel, Navi Mumbai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#FAF9F5;
+    --ink:#121212;
+    --ink-soft:#4A4844;
+    --gold:#AD8A4E;
+    --gold-deep:#8C6F3B;
+    --gold-tint:#F1E9D8;
+    --line:rgba(18,18,18,0.10);
+    --line-strong:rgba(18,18,18,0.16);
+    --header-h:88px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; font-weight:500; line-height:1.05; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{ max-width:1220px; margin:0 auto; padding:0 40px; }
+  section{ position:relative; }
+  .eyebrow{
+    font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-deep);
+    display:flex; align-items:center; gap:12px; font-weight:600; margin-bottom:22px;
+  }
+  .eyebrow::before{ content:""; width:30px; height:1px; background:var(--gold); }
+  .rule{ width:44px; height:1px; background:var(--gold); margin:20px 0; }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- LOGO (unchanged) ---------- */
+  .dk-mark{ display:flex; align-items:center; gap:12px; }
+  .dk-mark svg{ width:42px; height:42px; flex-shrink:0; }
+  .dk-mark .word{ font-family:'Fraunces', serif; font-weight:500; font-size:18px; letter-spacing:0.01em; line-height:1; }
+  .dk-mark .word span{ display:block; font-family:'Inter'; font-weight:600; font-size:8.5px; letter-spacing:0.2em; opacity:0.55; margin-top:4px; text-transform:uppercase; }
+
+  /* ---------- HEADER / NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    height:var(--header-h);
+    background:rgba(255,255,255,0.0);
+    border-bottom:1px solid transparent;
+    transition:background .35s ease, border-color .35s ease, height .35s ease;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    height:76px;
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:100%; }
+  .nav-links{ display:flex; gap:36px; }
+  .nav-links a{
+    font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;
+    position:relative; padding-bottom:6px; color:var(--ink-soft);
+    transition:color .2s ease;
+  }
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold); transition:width .25s ease; }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+  .nav-right{ display:flex; align-items:center; gap:16px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:12.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    padding:13px 24px; border-radius:2px; border:1px solid var(--ink);
+    transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .btn-solid{ background:var(--ink); color:var(--white); }
+  .btn-solid:hover{ background:var(--gold-deep); border-color:var(--gold-deep); transform:translateY(-1px); }
+  .btn-outline{ background:transparent; color:var(--ink); }
+  .btn-outline:hover{ background:var(--ink); color:var(--white); }
+  .btn-gold{ background:var(--gold); color:var(--white); border-color:var(--gold); }
+  .btn-gold:hover{ background:var(--gold-deep); border-color:var(--gold-deep); }
+
+  .wa-btn{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center; transition:border-color .2s ease, background .2s ease;
+  }
+  .wa-btn:hover{ background:var(--gold-tint); border-color:var(--gold); }
+  .wa-btn svg{ width:18px; height:18px; }
+
+  .nav-toggle{
+    display:none; width:40px; height:40px; align-items:center; justify-content:center;
+    background:none; border:none; flex-direction:column; gap:5px;
+  }
+  .nav-toggle span{ display:block; width:22px; height:1px; background:var(--ink); transition:transform .25s ease, opacity .25s ease; }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu{
+    position:fixed; inset:0; z-index:190; background:var(--white);
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:26px;
+    padding:40px; transform:translateY(-100%); transition:transform .4s ease;
+  }
+  .mobile-menu.open{ transform:translateY(0); }
+  .mobile-menu a{ font-family:'Fraunces'; font-size:32px; font-weight:400; }
+  .mobile-menu .mm-foot{ margin-top:30px; font-size:13px; color:var(--ink-soft); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:calc(var(--header-h) + 90px) 0 100px;
+    background:var(--white);
+    position:relative;
+  }
+  .hero-watermark{
+    position:absolute; right:-60px; top:60px; width:520px; opacity:0.05; pointer-events:none;
+  }
+  .hero .wrap{ position:relative; z-index:1; max-width:820px; }
+  .hero h1{
+    font-size:clamp(40px, 6.4vw, 74px);
+    font-weight:400;
+  }
+  .hero h1 em{ font-style:italic; color:var(--gold-deep); font-weight:400; }
+  .hero p.lede{
+    font-size:17.5px; line-height:1.75; color:var(--ink-soft); max-width:560px; margin-top:26px;
+  }
+  .hero-actions{ display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
+  .hero-strip{
+    margin-top:80px; padding-top:34px; border-top:1px solid var(--line);
+    display:flex; gap:60px; flex-wrap:wrap;
+  }
+  .hero-strip div b{ font-family:'Fraunces'; font-weight:500; font-size:30px; display:block; }
+  .hero-strip div span{ font-size:11.5px; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-soft); }
+
+  /* ---------- PILLARS ---------- */
+  .pillars{ background:var(--paper); padding:110px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .section-head{ max-width:640px; margin-bottom:64px; }
+  .section-head h2{ font-size:clamp(30px,4vw,44px); font-weight:400; margin-bottom:16px; }
+  .section-head p{ color:var(--ink-soft); font-size:16px; line-height:1.7; }
+  .pillar-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong); }
+  .pillar-card{
+    background:var(--paper); padding:44px 32px; transition:background .25s ease;
+    display:flex; flex-direction:column;
+  }
+  .pillar-card:hover{ background:var(--white); }
+  .pillar-card svg{ width:30px; height:30px; margin-bottom:28px; stroke:var(--gold-deep); }
+  .pillar-card h3{ font-size:21px; font-weight:500; margin-bottom:12px; }
+  .pillar-card p{ font-size:14px; line-height:1.65; color:var(--ink-soft); flex-grow:1; margin-bottom:22px; }
+  .pillar-card a{ font-size:11.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-deep); border-bottom:1px solid var(--gold); padding-bottom:3px; align-self:flex-start; }
+
+  /* ---------- DESTINATIONS ---------- */
+  .destinations{ padding:120px 0; }
+  .dest-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .dest-card{
+    position:relative; aspect-ratio:4/5; border-radius:2px; overflow:hidden;
+    display:flex; align-items:flex-end; padding:26px; color:var(--white);
+    isolation:isolate;
+  }
+  .dest-card::before{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(160deg, var(--bg1), var(--bg2));
+  }
+  .dest-card::after{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0) 55%);
+  }
+  .dest-card .tag{ font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; opacity:0.85; margin-bottom:8px; display:block; }
+  .dest-card h3{ font-size:26px; font-weight:400; color:var(--white); }
+  .dc1{ --bg1:#2c2a26; --bg2:#5a5347; }
+  .dc2{ --bg1:#1c2b30; --bg2:#3f5b61; }
+  .dc3{ --bg1:#2e2620; --bg2:#8c6f3b; }
+  .dc4{ --bg1:#25292b; --bg2:#4a565a; }
+  .dc5{ --bg1:#332a1e; --bg2:#6b5433; }
+  .dc6{ --bg1:#1e2426; --bg2:#3a4649; }
+
+  /* ---------- CRUISES / POLAR split feature ---------- */
+  .feature{ padding:100px 0; border-top:1px solid var(--line); }
+  .feature .wrap{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:80px; align-items:center; }
+  .feature.reverse .wrap{ direction:rtl; }
+  .feature.reverse .wrap > *{ direction:ltr; }
+  .feature-visual{
+    aspect-ratio:1/1; border-radius:2px; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .feature-visual svg{ width:46%; opacity:0.9; }
+  .fv-cruise{ background:linear-gradient(160deg,#16232b,#3c5866); }
+  .fv-polar{ background:linear-gradient(160deg,#e9edf0,#c7d2d8); }
+  .fv-polar svg{ stroke:#1c2b30; }
+  .fv-cruise svg{ stroke:#F1E9D8; }
+  .feature h2{ font-size:clamp(28px,3.6vw,40px); font-weight:400; margin-bottom:20px; }
+  .feature p{ font-size:16px; line-height:1.75; color:var(--ink-soft); margin-bottom:16px; max-width:480px; }
+  .feature-list{ margin-top:26px; display:flex; flex-direction:column; gap:14px; }
+  .feature-list li{ display:flex; gap:12px; font-size:14.5px; color:var(--ink); align-items:flex-start; }
+  .feature-list li svg{ width:15px; height:15px; margin-top:3px; flex-shrink:0; stroke:var(--gold-deep); }
+
+  /* ---------- CUSTOM PROCESS ---------- */
+  .process{ background:var(--ink); color:var(--white); padding:120px 0; }
+  .process .section-head h2{ color:var(--white); }
+  .process .section-head p{ color:rgba(255,255,255,0.6); }
+  .process .eyebrow{ color:var(--gold); }
+  .process-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:40px; }
+  .process-step .n{ font-family:'Fraunces'; font-size:15px; color:var(--gold); margin-bottom:20px; display:block; }
+  .process-step h3{ font-size:19px; font-weight:500; margin-bottom:12px; color:var(--white); }
+  .process-step p{ font-size:14px; line-height:1.65; color:rgba(255,255,255,0.6); }
+
+  /* ---------- WHY US ---------- */
+  .why{ padding:120px 0; }
+  .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px 60px; }
+  .why-item{ display:flex; gap:22px; }
+  .why-item .n{ font-family:'Fraunces'; font-size:34px; color:var(--gold); font-weight:400; flex-shrink:0; width:52px; }
+  .why-item h3{ font-size:19px; font-weight:500; margin-bottom:10px; }
+  .why-item p{ font-size:14.5px; line-height:1.7; color:var(--ink-soft); }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{ background:var(--paper); padding:120px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .test-track{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong); }
+  .test-card{ background:var(--paper); padding:40px 34px; }
+  .test-card .quote-mark{ font-family:'Fraunces'; font-size:44px; color:var(--gold); line-height:1; margin-bottom:12px; display:block; }
+  .test-card p{ font-size:15px; line-height:1.7; color:var(--ink); margin-bottom:24px; }
+  .test-who b{ display:block; font-size:14px; font-weight:600; }
+  .test-who span{ font-size:12.5px; color:var(--ink-soft); }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter{ padding:90px 0; }
+  .nl-box{
+    border:1px solid var(--line-strong); border-radius:2px; padding:56px;
+    display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap;
+  }
+  .nl-box h3{ font-size:24px; font-weight:400; max-width:340px; }
+  .nl-form{ display:flex; gap:0; flex:1; min-width:280px; max-width:440px; position:relative; }
+  .nl-form input{
+    flex:1; border:none; border-bottom:1px solid var(--ink); background:transparent;
+    font-size:15px; padding:12px 4px; font-family:'Inter';
+  }
+  .nl-form input:focus{ outline:none; border-color:var(--gold); }
+  .nl-form button{
+    background:none; border:none; border-bottom:1px solid var(--ink);
+    font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0 4px 12px;
+    white-space:nowrap;
+  }
+  .nl-msg{ font-size:12.5px; margin-top:10px; min-height:16px; }
+  .nl-msg.ok{ color:#3f6b4a; }
+  .nl-msg.err{ color:#a13c2f; }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ padding:0 0 120px; }
+  .contact .wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; }
+  .contact h2{ font-size:clamp(30px,4vw,44px); font-weight:400; margin-bottom:20px; }
+  .contact-lead{ font-size:16px; color:var(--ink-soft); line-height:1.75; max-width:420px; margin-bottom:44px; }
+  .info-row{ display:flex; gap:18px; padding:20px 0; border-top:1px solid var(--line); align-items:flex-start; }
+  .info-row:last-child{ border-bottom:1px solid var(--line); }
+  .info-row svg{ width:18px; height:18px; flex-shrink:0; margin-top:3px; stroke:var(--gold-deep); }
+  .info-row b{ display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-soft); margin-bottom:5px; font-weight:600; }
+  .info-row a, .info-row .val{ font-size:16px; font-weight:500; }
+
+  form.inquiry{ background:var(--paper); border:1px solid var(--line); padding:44px; border-radius:2px; }
+  form.inquiry .ff-eyebrow{ margin-bottom:26px; }
+  .field{ margin-bottom:22px; }
+  .field label{ display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-soft); margin-bottom:9px; font-weight:600; }
+  .field input, .field select, .field textarea{
+    width:100%; border:none; border-bottom:1px solid var(--line-strong); background:transparent;
+    font-family:'Inter'; font-size:15.5px; padding:9px 2px; color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--gold); }
+  .field textarea{ resize:vertical; min-height:64px; }
+  .field .err-text{ display:none; font-size:11.5px; color:#a13c2f; margin-top:6px; }
+  .field.invalid input, .field.invalid textarea{ border-color:#a13c2f; }
+  .field.invalid .err-text{ display:block; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .submit-btn{
+    width:100%; margin-top:6px; padding:16px; border-radius:2px; border:1px solid var(--ink);
+    background:var(--ink); color:var(--white); font-weight:600; font-size:12.5px;
+    letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:background .2s ease;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .submit-btn:hover{ background:var(--gold-deep); border-color:var(--gold-deep); }
+  .submit-btn:disabled{ opacity:0.6; cursor:progress; }
+  .spinner{ width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,0.4); border-top-color:#fff; animation:spin .7s linear infinite; display:none; }
+  .submit-btn.loading .spinner{ display:inline-block; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .form-success{ display:none; text-align:center; padding:30px 10px; }
+  .form-success.show{ display:block; }
+  .form-success svg{ width:36px; height:36px; stroke:var(--gold-deep); margin:0 auto 16px; }
+  .form-success h4{ font-family:'Fraunces'; font-weight:500; font-size:20px; margin-bottom:8px; }
+  .form-success p{ font-size:14px; color:var(--ink-soft); }
+  form.inquiry.submitted .form-fields{ display:none; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); color:var(--white); padding:80px 0 30px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:50px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,0.14); }
+  footer .f-about p{ margin-top:20px; max-width:260px; font-size:14px; color:rgba(255,255,255,0.55); line-height:1.7; }
+  footer .f-links{ display:flex; gap:64px; flex-wrap:wrap; }
+  footer .f-links div b{ display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); margin-bottom:16px; font-weight:600; }
+  footer .f-links div a{ display:block; font-size:14.5px; margin-bottom:12px; color:rgba(255,255,255,0.78); transition:color .2s ease; }
+  footer .f-links div a:hover{ color:var(--gold); }
+  .f-bottom{ display:flex; justify-content:space-between; padding-top:26px; font-size:12px; color:rgba(255,255,255,0.45); flex-wrap:wrap; gap:10px; }
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .fab-wa{
+    position:fixed; bottom:26px; right:26px; z-index:150;
+    width:54px; height:54px; border-radius:50%; background:#111; color:#fff;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .fab-wa:hover{ transform:translateY(-3px); background:var(--gold-deep); }
+  .fab-wa svg{ width:24px; height:24px; }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-top{
+    position:fixed; bottom:26px; left:26px; z-index:150; width:44px; height:44px; border-radius:50%;
+    border:1px solid var(--line-strong); background:var(--white); display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .3s ease, transform .2s ease;
+  }
+  .back-top.show{ opacity:1; pointer-events:auto; }
+  .back-top:hover{ transform:translateY(-3px); border-color:var(--gold); }
+  .back-top svg{ width:16px; height:16px; }
+
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  @media (max-width:980px){
+    .pillar-grid{ grid-template-columns:1fr 1fr; }
+    .dest-grid{ grid-template-columns:1fr 1fr; }
+    .feature .wrap{ grid-template-columns:1fr; }
+    .feature.reverse .wrap{ direction:ltr; }
+    .process-grid{ grid-template-columns:1fr 1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+    .test-track{ grid-template-columns:1fr; }
+    .contact .wrap{ grid-template-columns:1fr; gap:50px; }
+    .two-col{ grid-template-columns:1fr; }
+  }
+  @media (max-width:760px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:flex; }
+    .pillar-grid{ grid-template-columns:1fr; }
+    .dest-grid{ grid-template-columns:1fr; }
+    .process-grid{ grid-template-columns:1fr; }
+    .hero-strip{ gap:34px; }
+    .wrap{ padding:0 24px; }
+    .nl-box{ padding:36px 24px; }
+    form.inquiry{ padding:28px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition:none; opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="dk-mark" aria-label="DK Tours & Travels home">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="14" fill="#141310"/>
+        <polygon points="0,100 46,100 82,18 40,18" fill="#F6F0E2" opacity="0.95"/>
+        <text x="12" y="72" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="58" fill="#F6F0E2">D</text>
+        <text x="46" y="72" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="58" fill="#141310">K</text>
+      </svg>
+      <span class="word">DK TOURS<span>&amp; TRAVELS CO.</span></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#destinations" data-nav>Destinations</a>
+      <a href="#cruises" data-nav>Cruises</a>
+      <a href="#polar" data-nav>Polar Expeditions</a>
+      <a href="#custom" data-nav>Custom Journeys</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#contact" data-nav>Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="wa-btn" id="navWa" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="#141310"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 01-4.18-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.15 8.15 0 01-1.26-4.32c0-4.51 3.68-8.19 8.2-8.19 2.19 0 4.25.85 5.8 2.4a8.13 8.13 0 012.4 5.79c0 4.52-3.68 8.2-8.15 8.2zm4.49-6.14c-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.78.97-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.29.36-.43.12-.14.16-.24.24-.4.08-.16.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.24-.86.84-.86 2.05s.88 2.38 1 2.54c.12.16 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-gold">Plan My Trip</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#destinations" data-nav-mobile>Destinations</a>
+  <a href="#cruises" data-nav-mobile>Cruises</a>
+  <a href="#polar" data-nav-mobile>Polar Expeditions</a>
+  <a href="#custom" data-nav-mobile>Custom Journeys</a>
+  <a href="#about" data-nav-mobile>About</a>
+  <a href="#contact" data-nav-mobile>Contact</a>
+  <div class="mm-foot">+91 80970 20474 &nbsp;·&nbsp; info@dktoursandtravels.in</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="hero-watermark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,100 46,100 82,18 40,18" fill="#141310"/>
+  </svg>
+  <div class="wrap">
+    <div class="eyebrow reveal">Panvel · Navi Mumbai — Private Travel Design</div>
+    <h1 class="reveal">Bespoke journeys,<br><em>quietly extraordinary.</em></h1>
+    <p class="lede reveal">DK Tours &amp; Travels curates private itineraries for discerning travellers — handpicked destinations, luxury cruises, polar expeditions, and journeys designed entirely around you. No templates. No packages off a shelf.</p>
+    <div class="hero-actions reveal">
+      <a href="#contact" class="btn btn-solid">Plan My Trip</a>
+      <a href="#destinations" class="btn btn-outline">Explore Destinations</a>
+    </div>
+    <div class="hero-strip reveal">
+      <div><b>18+</b><span>Countries Curated</span></div>
+      <div><b>500+</b><span>Journeys Designed</span></div>
+      <div><b>24/7</b><span>Concierge Support</span></div>
+      <div><b>4.9</b><span>Traveller Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="pillars">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Curate</div>
+      <h2>Four ways to begin.</h2>
+      <p>Every journey starts as a conversation, not a catalogue. These are the disciplines we work in most.</p>
+    </div>
+    <div class="pillar-grid reveal">
+      <div class="pillar-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg>
+        <h3>Destinations</h3>
+        <p>Private itineraries across the world's finest addresses — from island sanctuaries to storied cities.</p>
+        <a href="#destinations">View Destinations</a>
+      </div>
+      <div class="pillar-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M2 20s2-1.5 4.5-1.5S11 20 13.5 20s4.5-1.5 4.5-1.5"/><path d="M4 18l1.5-8h13L20 18"/><path d="M12 10V4M9 6h6"/></svg>
+        <h3>Cruises</h3>
+        <p>Small-ship and expedition cruising — Mediterranean yachts to private charters, chosen for stillness over scale.</p>
+        <a href="#cruises">View Cruises</a>
+      </div>
+      <div class="pillar-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg>
+        <h3>Polar Expeditions</h3>
+        <p>Antarctica and the high Arctic — expedition-grade travel to the last truly untouched places on earth.</p>
+        <a href="#polar">View Expeditions</a>
+      </div>
+      <div class="pillar-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 20l9-16H3l9 16z"/><path d="M12 20V8"/></svg>
+        <h3>Customized Packages</h3>
+        <p>A route drawn from scratch — your pace, your interests, your budget, built day by day.</p>
+        <a href="#custom">Start Designing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="destinations" id="about" style="padding-bottom:0;">
+  <div class="wrap" style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:start; padding-bottom:100px;">
+    <div class="reveal">
+      <div class="eyebrow">// Who Designs Your Trip</div>
+      <h2 class="serif" style="font-size:clamp(30px,4vw,44px); font-weight:400;">A studio, not an agency.</h2>
+    </div>
+    <div class="reveal">
+      <p style="font-size:16.5px; line-height:1.8; color:var(--ink-soft); margin-bottom:20px;">DK Tours &amp; Travels is based out of Panvel, Navi Mumbai, and works with a deliberately small number of travellers each season. There is no call centre and no fixed package — each itinerary is drawn from a private brief: who is travelling, what pace suits them, and what "extraordinary" means to that particular traveller.</p>
+      <p style="font-size:16.5px; line-height:1.8; color:var(--ink-soft); margin-bottom:32px;">From a week on the ice in Antarctica to a slow month across the Mediterranean by private yacht, the process stays the same — a single point of contact, considered recommendations, and a plan built entirely around you.</p>
+      <div style="display:flex; align-items:center; gap:16px; padding-top:26px; border-top:1px solid var(--line);">
+        <div style="width:50px; height:50px; border-radius:50%; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Fraunces'; font-size:18px; flex-shrink:0;">RM</div>
+        <div>
+          <b style="display:block; font-size:15px;">Rituparna Mukhopadhyay</b>
+          <span style="font-size:13px; color:var(--ink-soft);">Founder &amp; CEO, DK Tours &amp; Travels</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESTINATIONS ============ -->
+<section class="destinations" id="destinations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Featured</div>
+      <h2>Destinations, done properly.</h2>
+      <p>A working selection of where our travellers are headed this season — each one designed, not booked off a shelf.</p>
+    </div>
+    <div class="dest-grid reveal">
+      <div class="dest-card dc1"><span class="tag">East Africa</span><h3>Kenya &amp; Tanzania</h3></div>
+      <div class="dest-card dc2"><span class="tag">Indian Ocean</span><h3>The Maldives</h3></div>
+      <div class="dest-card dc3"><span class="tag">Alpine Europe</span><h3>Switzerland</h3></div>
+      <div class="dest-card dc4"><span class="tag">Himalaya</span><h3>Bhutan</h3></div>
+      <div class="dest-card dc5"><span class="tag">Nordic</span><h3>Finland &amp; Lapland</h3></div>
+      <div class="dest-card dc6"><span class="tag">East Asia</span><h3>Japan</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRUISES ============ -->
+<section class="feature" id="cruises">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Cruises</div>
+      <h2>Travel by water, unhurried.</h2>
+      <p>Small-ship cruising and private charters, chosen for the quality of the water and the size of the guest list — never the other way around.</p>
+      <ul class="feature-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Mediterranean &amp; Adriatic private yacht charters</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Small-ship expedition cruising, Norway to Galápagos</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>River cruising through Europe's wine country</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="margin-top:30px;">Enquire About Cruises</a>
+    </div>
+    <div class="feature-visual fv-cruise reveal">
+      <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4"><path d="M15 65h70l-8 18H23z"/><path d="M50 65V15"/><path d="M50 20l24 25H50z"/><path d="M50 30l-18 20h18z"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POLAR ============ -->
+<section class="feature reverse" id="polar">
+  <div class="wrap">
+    <div class="feature-visual fv-polar reveal">
+      <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4"><path d="M50 10v80M14 28l72 44M86 28L14 72M50 10l-8 14h16zM50 90l-8-14h16zM14 28l16 2-6 14zM86 72l-16-2 6-14zM86 28l-16 2 6 14zM14 72l16-2-6-14z"/></svg>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Polar Expeditions</div>
+      <h2>Antarctica. The Arctic. On purpose.</h2>
+      <p>Expedition-grade journeys to the polar regions, run with specialist operators and expedition teams — built for travellers who want the real thing, done safely and without compromise.</p>
+      <ul class="feature-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Antarctic Peninsula expedition voyages</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Svalbard &amp; high Arctic wildlife expeditions</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Private fly-in access to remote polar camps</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="margin-top:30px;">Enquire About Polar Trips</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CUSTOM PROCESS ============ -->
+<section class="process" id="custom">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Customized Packages</div>
+      <h2>How a trip gets built.</h2>
+      <p>Four conversations, one itinerary — designed entirely around the traveller, not a template.</p>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <span class="n">01</span>
+        <h3>The Brief</h3>
+        <p>A conversation about pace, interests, budget and who's actually travelling.</p>
+      </div>
+      <div class="process-step">
+        <span class="n">02</span>
+        <h3>The Draft</h3>
+        <p>A day-by-day route with real properties, transfers and pacing — nothing placeholder.</p>
+      </div>
+      <div class="process-step">
+        <span class="n">03</span>
+        <h3>The Refinement</h3>
+        <p>We adjust until it's right — swap a city, add a day, upgrade a stay.</p>
+      </div>
+      <div class="process-step">
+        <span class="n">04</span>
+        <h3>The Journey</h3>
+        <p>Confirmed bookings and a single point of contact, available for the length of the trip.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why DK Tours</div>
+      <h2>Four reasons travellers come back.</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <span class="n">01</span>
+        <div><h3>Honest, unhurried planning.</h3><p>No pressure to book, no inflated itineraries — recommendations based on what actually suits you.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="n">02</span>
+        <div><h3>Your trip, your rules.</h3><p>Every itinerary is made-to-order. Nothing is pulled from a fixed package list.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="n">03</span>
+        <div><h3>Support that doesn't stop at booking.</h3><p>A single point of contact reachable through the trip — not just before you pay.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="n">04</span>
+        <div><h3>A well-connected network.</h3><p>Relationships with properties and operators that translate into better rooms, at no extra cost.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What Travellers Say</div>
+      <h2>A few recent journeys.</h2>
+    </div>
+    <div class="test-track reveal">
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>Our Antarctica trip was planned down to the fly-in windows and backup dates for weather. Nothing was improvised — it just felt that way, in the best sense.</p>
+        <div class="test-who"><b>Sameer P.</b><span>Antarctic Peninsula Expedition</span></div>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>We asked for a Mediterranean charter under a fixed budget and got three genuinely different routes, each explained honestly — not just the priciest one pushed on us.</p>
+        <div class="test-who"><b>Ananya &amp; Neel</b><span>Adriatic Yacht Charter</span></div>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>Every property, driver and check-in time for our Kenya trip was confirmed in writing before we left. It's the calmest a big family trip has ever felt.</p>
+        <div class="test-who"><b>Rohan J.</b><span>Kenya, Family of 8</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter">
+  <div class="wrap">
+    <div class="nl-box reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px;">Stay In The Loop</div>
+        <h3>Journeys, ideas &amp; the odd secret deal — occasionally, not endlessly.</h3>
+      </div>
+      <div>
+        <form class="nl-form" id="nlForm" novalidate>
+          <input type="email" id="nlEmail" placeholder="Your email address" autocomplete="email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="nl-msg" id="nlMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">// Start Planning</div>
+      <h2>Let's design<br>your journey.</h2>
+      <p class="contact-lead">Send over a rough sense of dates and destination, or call directly — Rituparna and the team typically reply the same day.</p>
+
+      <div class="info-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><b>Location</b><div class="val">Panvel, Navi Mumbai, India</div></div>
+      </div>
+      <div class="info-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2.2z"/></svg>
+        <div><b>Phone</b><a href="tel:+918097020474">+91 80970 20474</a></div>
+      </div>
+      <div class="info-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+        <div><b>Email</b><a href="mailto:info@dktoursandtravels.in">info@dktoursandtravels.in</a></div>
+      </div>
+      <div class="info-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg>
+        <div><b>Website</b><a href="https://www.dktoursandtravels.in" target="_blank" rel="noopener">www.dktoursandtravels.in</a></div>
+      </div>
+    </div>
+
+    <form class="inquiry reveal" id="tripForm" novalidate>
+      <div class="eyebrow ff-eyebrow">// Request An Itinerary</div>
+
+      <div class="form-fields">
+        <div class="two-col">
+          <div class="field" data-field="name">
+            <label for="name">Full Name</label>
+            <input id="name" name="name" type="text" required placeholder="Your full name">
+            <span class="err-text">Please enter your name.</span>
+          </div>
+          <div class="field" data-field="phone">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" required placeholder="+91 XXXXX XXXXX">
+            <span class="err-text">Please enter a valid phone number.</span>
+          </div>
+        </div>
+        <div class="field" data-field="email">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com">
+          <span class="err-text">Please enter a valid email address.</span>
+        </div>
+        <div class="field" data-field="interest">
+          <label for="interest">Interested In</label>
+          <select id="interest" name="interest" required>
+            <option value="">Select one</option>
+            <option>Destinations</option>
+            <option>Cruises</option>
+            <option>Polar Expeditions</option>
+            <option>Customized Package</option>
+          </select>
+          <span class="err-text">Please select an option.</span>
+        </div>
+        <div class="two-col">
+          <div class="field" data-field="dates">
+            <label for="dates">Travel Dates</label>
+            <input id="dates" name="dates" type="text" placeholder="e.g. Mid September, 7 nights">
+          </div>
+          <div class="field" data-field="pax">
+            <label for="pax">Travellers</label>
+            <input id="pax" name="pax" type="number" min="1" placeholder="2">
+          </div>
+        </div>
+        <div class="field" data-field="msg">
+          <label for="msg">Anything Else</label>
+          <textarea id="msg" name="msg" placeholder="Budget, preferences, must-sees..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="spinner"></span>
+          <span class="btn-label">Send Enquiry</span>
+        </button>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>
+        <h4>Enquiry received.</h4>
+        <p>Your message is on its way. We'll also open your email client so you can send it directly to info@dktoursandtravels.in — feel free to add anything else before hitting send.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-about">
+      <div class="dk-mark">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="14" fill="#F6F0E2"/>
+          <polygon points="0,100 46,100 82,18 40,18" fill="#141310" opacity="0.95"/>
+          <text x="12" y="72" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="58" fill="#141310">D</text>
+          <text x="46" y="72" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="58" fill="#F6F0E2">K</text>
+        </svg>
+        <span class="word">DK TOURS<span>&amp; TRAVELS CO.</span></span>
+      </div>
+      <p>Bespoke travel design, quietly run out of Panvel, Navi Mumbai.</p>
+    </div>
+    <div class="f-links">
+      <div>
+        <b>Explore</b>
+        <a href="#destinations">Destinations</a>
+        <a href="#cruises">Cruises</a>
+        <a href="#polar">Polar Expeditions</a>
+        <a href="#custom">Custom Journeys</a>
+      </div>
+      <div>
+        <b>Studio</b>
+        <a href="#about">About</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <b>Reach Us</b>
+        <a href="tel:+918097020474">+91 80970 20474</a>
+        <a href="mailto:info@dktoursandtravels.in">info@dktoursandtravels.in</a>
+        <a href="https://www.dktoursandtravels.in" target="_blank" rel="noopener">dktoursandtravels.in</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap f-bottom">
+    <span>© 2026 DK Tours &amp; Travels. All rights reserved.</span>
+    <span>Founded &amp; led by Rituparna Mukhopadhyay</span>
+  </div>
+</footer>
+
+<a class="fab-wa" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 01-4.18-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.15 8.15 0 01-1.26-4.32c0-4.51 3.68-8.19 8.2-8.19 2.19 0 4.25.85 5.8 2.4a8.13 8.13 0 012.4 5.79c0 4.52-3.68 8.2-8.15 8.2zm4.49-6.14c-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.78.97-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.29.36-.43.12-.14.16-.24.24-.4.08-.16.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.24-.86.84-.86 2.05s.88 2.38 1 2.54c.12.16 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#141310" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------------------------------------------------------
+     CONFIG
+  --------------------------------------------------------- */
+  const PHONE_INTL = '918097020474'; // no + for wa.me / api links
+  const WA_MESSAGE  = encodeURIComponent("Hello DK Tours & Travels! I'd like to plan a trip.");
+  const WA_LINK = `https://wa.me/${PHONE_INTL}?text=${WA_MESSAGE}`;
+  document.getElementById('navWa').href = WA_LINK;
+  document.getElementById('fabWa').href = WA_LINK;
+
+  /* ---------------------------------------------------------
+     STICKY HEADER
+  --------------------------------------------------------- */
+  const header = document.getElementById('siteHeader');
+  const backTop = document.getElementById('backTop');
+  function onScroll(){
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    backTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---------------------------------------------------------
+     MOBILE MENU
+  --------------------------------------------------------- */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu(){
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  navToggle.addEventListener('click', function(){
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  document.querySelectorAll('[data-nav-mobile]').forEach(a=>a.addEventListener('click', closeMenu));
+
+  /* ---------------------------------------------------------
+     BACK TO TOP
+  --------------------------------------------------------- */
+  backTop.addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  /* ---------------------------------------------------------
+     SCROLL REVEAL
+  --------------------------------------------------------- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ---------------------------------------------------------
+     SCROLLSPY — highlight active nav link
+  --------------------------------------------------------- */
+  const navSections = ['destinations','cruises','polar','custom','about','contact']
+    .map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinkEls = document.querySelectorAll('[data-nav]');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = entry.target.id;
+      const link = document.querySelector(`[data-nav][href="#${id}"]`);
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinkEls.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+  navSections.forEach(sec=>spy.observe(sec));
+
+  /* ---------------------------------------------------------
+     NEWSLETTER — client-side validation + feedback
+  --------------------------------------------------------- */
+  const nlForm = document.getElementById('nlForm');
+  const nlEmail = document.getElementById('nlEmail');
+  const nlMsg = document.getElementById('nlMsg');
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  nlForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const val = nlEmail.value.trim();
+    if(!EMAIL_RE.test(val)){
+      nlMsg.textContent = 'Please enter a valid email address.';
+      nlMsg.className = 'nl-msg err';
+      nlEmail.focus();
+      return;
+    }
+    // Simulated subscribe request (no backend in this static build).
+    const btn = nlForm.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+    setTimeout(()=>{
+      nlMsg.textContent = `You're in — updates will head to ${val}.`;
+      nlMsg.className = 'nl-msg ok';
+      nlForm.reset();
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }, 700);
+  });
+
+  /* ---------------------------------------------------------
+     TRIP ENQUIRY FORM — validation, async submit, mailto handoff
+  --------------------------------------------------------- */
+  const tripForm = document.getElementById('tripForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+  const PHONE_RE = /^[+\d][\d\s-]{7,}$/;
+
+  function setFieldError(fieldEl, isInvalid){
+    fieldEl.classList.toggle('invalid', isInvalid);
+  }
+
+  function validateTripForm(data){
+    let valid = true;
+    const nameField = tripForm.querySelector('[data-field="name"]');
+    const phoneField = tripForm.querySelector('[data-field="phone"]');
+    const emailField = tripForm.querySelector('[data-field="email"]');
+    const interestField = tripForm.querySelector('[data-field="interest"]');
+
+    const nameOk = data.name.trim().length > 1;
+    setFieldError(nameField, !nameOk); if(!nameOk) valid = false;
+
+    const phoneOk = PHONE_RE.test(data.phone.trim());
+    setFieldError(phoneField, !phoneOk); if(!phoneOk) valid = false;
+
+    const emailOk = EMAIL_RE.test(data.email.trim());
+    setFieldError(emailField, !emailOk); if(!emailOk) valid = false;
+
+    const interestOk = data.interest.trim().length > 0;
+    setFieldError(interestField, !interestOk); if(!interestOk) valid = false;
+
+    return valid;
+  }
+
+  // Simulated async network call — swap this for a real fetch() to your
+  // booking API / CRM endpoint when one is available.
+  function submitEnquiry(payload){
+    return new Promise((resolve)=>{
+      setTimeout(()=>resolve({ ok:true }), 900);
+    });
+  }
+
+  tripForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const fd = new FormData(tripForm);
+    const data = Object.fromEntries(fd.entries());
+
+    if(!validateTripForm(data)) return;
+
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    submitBtn.querySelector('.btn-label').textContent = 'Sending…';
+
+    submitEnquiry(data).then(function(res){
+      submitBtn.classList.remove('loading');
+      if(res.ok){
+        tripForm.classList.add('submitted');
+        formSuccess.classList.add('show');
+
+        // Hand off to the user's email client with everything pre-filled,
+        // since this static site has no live backend to deliver mail server-side.
+        const subject = encodeURIComponent('Trip enquiry: ' + (data.interest || 'DK Tours & Travels'));
+        const body = encodeURIComponent(
+          `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nInterested in: ${data.interest}\nDates: ${data.dates || '-'}\nTravellers: ${data.pax || '-'}\n\nMessage:\n${data.msg || '-'}`
+        );
+        window.location.href = `mailto:info@dktoursandtravels.in?subject=${subject}&body=${body}`;
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-label').textContent = 'Send Enquiry';
+      }
+    });
+  });
+
+  // Clear field error state as the user corrects it
+  tripForm.querySelectorAll('input, select, textarea').forEach(function(el){
+    el.addEventListener('input', function(){
+      const field = el.closest('.field');
+      if(field) field.classList.remove('invalid');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
